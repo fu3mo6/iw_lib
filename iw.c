@@ -512,6 +512,10 @@ static int __handle_cmd(struct nl80211_state *state, enum id_input idby,
 	err = cmd->handler(state, msg, argc, argv, idby);
 	if (err)
 		goto out;
+	
+	if(input_handler){
+		register_handler(input_handler, input_handler_data);
+	}
 
 	nl_socket_set_cb(state->nl_sock, s_cb);
 
