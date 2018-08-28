@@ -1,6 +1,10 @@
 #ifndef __IW_H
 #define __IW_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <stdbool.h>
 #include <netlink/netlink.h>
 #include <netlink/genl/genl.h>
@@ -234,8 +238,29 @@ DECLARE_SECTION(get);
 
 char *hex2bin(const char *hex, char *buf);
 
-int lib_main(int argc, char **argv,
-								int (*user_handler)(struct nl_msg *, void *),
-								void *user_data);		
+#ifdef __MAKE_LIB
+
+enum plink_state {
+	LISTEN,
+	OPN_SNT,
+	OPN_RCVD,
+	CNF_RCVD,
+	ESTAB,
+	HOLDING,
+	BLOCKED
+};
+
+static int no_seq_check(struct nl_msg *msg, void *arg)
+{
+	return NL_OK;
+}
+
+int lib_main(int argc, char **argv,int (*user_handler)(struct nl_msg *, void *), void *user_data);	
+
+#endif
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __IW_H */

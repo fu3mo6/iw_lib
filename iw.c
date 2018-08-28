@@ -24,6 +24,43 @@
 #include "nl80211.h"
 #include "iw.h"
 
+#ifdef __MAKE_LIB
+#include "ap.c"
+#include "bitrate.c"
+#include "coalesce.c"
+#include "connect.c"
+#include "cqm.c"
+#include "event.c"
+#include "hwsim.c"
+#include "ibss.c"
+#include "info.c"
+#include "interface.c"
+#include "link.c"
+#include "mesh.c"
+
+#include "mgmt.c"
+#include "mpath.c"
+#include "mpp.c"
+#include "ocb.c"
+#include "offch.c"
+#include "p2p.c"
+#include "phy.c"
+#include "ps.c"
+#include "reason.c"
+
+#include "reg.c"
+#include "roc.c"
+#include "scan.c"
+#include "sections.c"
+#include "station.c"
+#include "status.c"
+#include "survey.c"
+#include "util.c"
+#include "vendor.c"
+//#include "version.c"
+#include "wowlan.c"
+#endif
+
 /* libnl 1.x compatibility code */
 #if !defined(CONFIG_LIBNL20) && !defined(CONFIG_LIBNL30)
 static inline struct nl_handle *nl_socket_alloc(void)
@@ -547,6 +584,8 @@ int handle_cmd(struct nl80211_state *state, enum id_input idby,
 {
 	return __handle_cmd(state, idby, argc, argv, NULL);
 }
+				 
+#ifdef __MAKE_LIB
 
 int lib_main(int argc, char **argv,
 								int (*user_handler)(struct nl_msg *, void *),
@@ -555,9 +594,11 @@ int lib_main(int argc, char **argv,
 	struct nl80211_state nlstate;
 	int err;
 	const struct cmd *cmd = NULL;
-	
-	input_handler = user_handler;
-	input_handler_data = user_data;
+
+	if(user_handler)
+		input_handler = user_handler;
+	if(user_data)
+		input_handler_data = user_data;
 
 	/* calculate command size including padding */
 	cmd_size = labs((long)&__section_set - (long)&__section_get);
@@ -628,21 +669,9 @@ int lib_main(int argc, char **argv,
 
 	return err;
 }
-
 								
-static int test_handler(struct nl_msg *msg, void *arg)
-{
-	printf("It's my test handler!!\n");
-	return NL_SKIP;
-}
+#else
 
-int main(int argc, char** argv)
-{
-	return lib_main(argc, argv, test_handler, NULL);
-}
-
-				 
-#if 0
 int main(int argc, char **argv)
 {
 	struct nl80211_state nlstate;

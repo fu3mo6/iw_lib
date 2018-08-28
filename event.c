@@ -4,10 +4,12 @@
 #include <errno.h>
 #include "iw.h"
 
+#ifndef __MAKE_LIB
 static int no_seq_check(struct nl_msg *msg, void *arg)
 {
 	return NL_OK;
 }
+#endif
 
 struct ieee80211_beacon_channel {
 	__u16 center_freq;

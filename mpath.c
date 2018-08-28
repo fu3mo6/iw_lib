@@ -13,6 +13,7 @@
 
 SECTION(mpath);
 
+#ifndef __MAKE_LIB
 enum plink_state {
 	LISTEN,
 	OPN_SNT,
@@ -22,7 +23,7 @@ enum plink_state {
 	HOLDING,
 	BLOCKED
 };
-
+#endif
 
 static int print_mpath_handler(struct nl_msg *msg, void *arg)
 {

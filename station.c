@@ -13,6 +13,7 @@
 
 SECTION(station);
 
+#ifndef __MAKE_LIB
 enum plink_state {
 	LISTEN,
 	OPN_SNT,
@@ -22,6 +23,7 @@ enum plink_state {
 	HOLDING,
 	BLOCKED
 };
+#endif
 
 static void print_power_mode(struct nlattr *a)
 {

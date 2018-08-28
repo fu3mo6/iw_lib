@@ -299,11 +299,13 @@ static int handle_cac_trigger(struct nl80211_state *state,
 
 	return put_chandef(msg, &chandef);
 }
-
+					
+#ifndef __MAKE_LIB
 static int no_seq_check(struct nl_msg *msg, void *arg)
 {
 	return NL_OK;
 }
+#endif
 
 static int handle_cac(struct nl80211_state *state,
 		      struct nl_msg *msg,
