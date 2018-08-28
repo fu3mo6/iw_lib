@@ -699,14 +699,14 @@ static int handle_chanfreq(struct nl80211_state *state, struct nl_msg *msg,
 	return -ENOBUFS;
 }
 
-static int handle_freq(struct nl80211_state *state, struct nl_msg *msg,
+static int iface_handle_freq(struct nl80211_state *state, struct nl_msg *msg,
 		       int argc, char **argv,
 		       enum id_input id)
 {
 	return handle_chanfreq(state, msg, false, argc, argv, id);
 }
 
-static int handle_chan(struct nl80211_state *state, struct nl_msg *msg,
+static int iface_handle_chan(struct nl80211_state *state, struct nl_msg *msg,
 		       int argc, char **argv,
 		       enum id_input id)
 {
@@ -717,7 +717,7 @@ SECTION(switch);
 COMMAND(switch, freq,
 	"<freq> [NOHT|HT20|HT40+|HT40-|5MHz|10MHz|80MHz] [beacons <count>] [block-tx]\n"
 	"<control freq> [5|10|20|40|80|80+80|160] [<center1_freq> [<center2_freq>]] [beacons <count>] [block-tx]",
-	NL80211_CMD_CHANNEL_SWITCH, 0, CIB_NETDEV, handle_freq,
+	NL80211_CMD_CHANNEL_SWITCH, 0, CIB_NETDEV, iface_handle_freq,
 	"Switch the operating channel by sending a channel switch announcement (CSA).");
 COMMAND(switch, channel, "<channel> [NOHT|HT20|HT40+|HT40-|5MHz|10MHz|80MHz] [beacons <count>] [block-tx]",
-	NL80211_CMD_CHANNEL_SWITCH, 0, CIB_NETDEV, handle_chan, NULL);
+	NL80211_CMD_CHANNEL_SWITCH, 0, CIB_NETDEV, iface_handle_chan, NULL);
