@@ -26,7 +26,7 @@ IW_MAKE_ENV = CC=${CC} CFLAGS="${IW_CFLAGS}" LIBS="${LIBS}" NO_PKG_CONFIG=Y
 endif
 
 LIBS += -L./iw_src -liwstatic
-OBJS += iw_util.o iw_src/libiwstatic.a
+OBJS += iw_util.o iw_wiphy.o iw_src/libiwstatic.a
 
 EXE = iw_lib_sample
 
