@@ -41,6 +41,7 @@ int WiPhy_handler(struct nl_msg *msg, void *arg)
 	if (tb_msg[NL80211_ATTR_IFNAME]){
 		ifname = nla_get_string(tb_msg[NL80211_ATTR_IFNAME]);
 		iface = &wiphy->wifi_iface_map[ifname];
+		iface->name = ifname;
 	}
 	else {
 		printf("Unnamed/non-netdev interface not supported\n");
