@@ -2,7 +2,8 @@
 'iw' is a tool to use nl80211.
 Please refer to the link for any documentation or update.
 
-http://wireless.kernel.org/en/users/Documentation/iw.
+http://wireless.kernel.org/en/users/Documentation/iw
+
 https://git.kernel.org/pub/scm/linux/kernel/git/jberg/iw.git
 
 This project makes few modifications on iw source.
