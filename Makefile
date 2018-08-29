@@ -11,7 +11,7 @@ CXXFLAGS += ${NL_CFLAGS}
 CFLAGS += ${NL_CFLAGS}
 LIBS += ${NL_LIBS}
 	
-IW_CFLAGS = -O2 -g -D__MAKE_LIB
+IW_CFLAGS = -O2 -g -D__MAKE_LIB -Wno-unused-function
 IW_MAKE_ENV = CFLAGS="${IW_CFLAGS}"
 
 # Manual or cross compiler
@@ -19,7 +19,7 @@ IW_MAKE_ENV = CFLAGS="${IW_CFLAGS}"
 else
 
 IW_CFLAGS = ${CFLAGS}
-IW_CFLAGS += -O2 -g -D__MAKE_LIB
+IW_CFLAGS += -O2 -g -D__MAKE_LIB -Wno-unused-function
 IW_CFLAGS += -DCONFIG_LIBNL30
 IW_MAKE_ENV = CC=${CC} CFLAGS="${IW_CFLAGS}" LIBS="${LIBS}" NO_PKG_CONFIG=Y
 
